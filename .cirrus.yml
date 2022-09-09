@@ -5,7 +5,7 @@ nix_shell_task:
   timeout_in: 120m
   environment:
     CACHIX_AUTH_TOKEN: ENCRYPTED[!236a7efb3d930235464b021112417f9d6340798949f3cd06d3ad3fa6540ee28ea758499a9770d155805cb9d29d2e2157!]
-    NIX_CONFIG: "extra-experimental-features = nix-command"
+    NIX_CONFIG: "extra-experimental-features = nix-command flakes"
 
   install_nix_script: sh <(curl -L https://nixos.org/nix/install)
 
