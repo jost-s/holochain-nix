@@ -26,7 +26,7 @@
               inherit pname version;
 
               buildInputs = [
-                (rust-bin.stable.latest.default.override {
+                (rust-bin.stable."1.62.0".default.override {
                   extensions = [ "rust-src" ];
                   targets = [ "wasm32-unknown-unknown" ];
                 })
@@ -67,7 +67,7 @@
               inherit version;
 
               buildInputs = [
-                (rust-bin.stable.latest.default.override {
+                (rust-bin.stable."1.62.0".default.override {
                   extensions = [ "rust-src" ];
                   targets = [ "wasm32-unknown-unknown" ];
                 })
@@ -95,6 +95,13 @@
                 export PATH="$out/bin:$PATH"
               '';
             };
+      };
+
+      devShells.aarch64-darwin.default = 
+      pkgs.mkShell {
+        buildInputs = [
+          self.packages.aarch64-darwin.holochain
+        ];
       };
     };
 }
