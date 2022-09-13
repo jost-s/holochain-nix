@@ -26,7 +26,7 @@
               inherit pname version;
 
               buildInputs = [
-                (rust-bin.stable."1.62.0".default.override {
+                (rust-bin.stable."1.60.0".default.override {
                   extensions = [ "rust-src" ];
                   targets = [ "wasm32-unknown-unknown" ];
                 })
@@ -67,7 +67,7 @@
               inherit version;
 
               buildInputs = [
-                (rust-bin.stable."1.62.0".default.override {
+                (rust-bin.stable."1.60.0".default.override {
                   extensions = [ "rust-src" ];
                   targets = [ "wasm32-unknown-unknown" ];
                 })
