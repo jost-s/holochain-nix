@@ -4,7 +4,7 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, rust-overlay, rustPlatform }:
+  outputs = { self, nixpkgs, rust-overlay }:
     let
       system = "aarch64-darwin";
       overlays = [ (import rust-overlay) ];
@@ -65,13 +65,10 @@
               inherit pname;
               inherit version;
 
+              nativeBuildInputs = [ perl ];
+
               buildInputs = [
-                (rust-bin.stable.latest.default.override {
-                  extensions = [ "rust-src" ];
-                  targets = [ "wasm32-unknown-unknown" ];
-                })
                 darwin.apple_sdk.frameworks.AppKit
-                perl
               ];
 
               src = builtins.fetchGit
@@ -81,7 +78,7 @@
                   rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
                 };
 
-              cargoSha256 = "03wf9r2csi6jpa7v5sw5lpxkrk4wfzwmzx7k3991q3bdjzcwnnwp";
+              cargoSha256 = "rSF0BQaGx18zvlGHvWlOUD7g9BQfden0ijsQEIMSWcg";
             };
       };
 
