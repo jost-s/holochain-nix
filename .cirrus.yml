@@ -22,5 +22,5 @@ nix_shell_task:
   nix_shell_script: |
     source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh > /dev/null 2>&1
     source /nix/var/nix/profiles/default/etc/profile.d/nix.sh > /dev/null 2>&1
-    nix build .#holochain | cachix push jost-s
+    # nix build .#holochain | cachix push jost-s
     nix build .#lair | cachix push jost-s
