@@ -4,7 +4,7 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, rust-overlay }:
+  outputs = { self, nixpkgs, rust-overlay, rustPlatform }:
     let
       system = "aarch64-darwin";
       overlays = [ (import rust-overlay) ];
@@ -61,8 +61,7 @@
             pname = "lair-keystore";
             version = "v0.2.0";
           in
-          stdenv.mkDerivation
-            {
+          rustPlatform.buildRustPackage rec {
               inherit pname;
               inherit version;
 
@@ -82,18 +81,7 @@
                   rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
                 };
 
-              buildPhase = ''
-                CARGO_HOME=.cargo cargo build --release --bin ${pname}
-              '';
-
-              installPhase = ''
-                mkdir -p $out/bin
-                mv target/release/${pname} $out/bin
-              '';
-
-              installCheckPhase = ''
-                export PATH="$out/bin:$PATH"
-              '';
+              cargoSha256 = "03wf9r2csi6jpa7v5sw5lpxkrk4wfzwmzx7k3991q3bdjzcwnnwp";
             };
       };
 
