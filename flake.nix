@@ -8,65 +8,68 @@
     let
       system = "aarch64-darwin";
       overlays = [ (import rust-overlay) ];
-      pkgs = import nixpkgs {
-        inherit overlays system;
-      };
-    in
-    {
+      pkgs = import nixpkgs { inherit overlays system; };
+    in {
       packages.aarch64-darwin = {
 
-        holochain =
-          with pkgs;
+        holochain = with pkgs;
           let
             pname = "holochain";
             version = "0.0.161";
-          in
-          rustPlatform.buildRustPackage rec {
-              inherit pname version;
+          in rustPlatform.buildRustPackage rec {
+            inherit pname version;
 
-              buildInputs = [
-                pkgs.darwin.apple_sdk.frameworks.AppKit
-              ];
+            nativeBuildInputs = [
+              (rust-bin.stable.latest.default.override {
+                extensions = [ "rust-src" ];
+                targets = [ "wasm32-unknown-unknown" ];
+              })
+            ];
 
-              src = builtins.fetchGit
-                {
-                  url = https://github.com/holochain/holochain;
-                  ref = "refs/tags/${pname}-${version}";
-                  rev = "cf8adc073596f4f5fc3dcf31c30bc8ade47a6f93";
-                };
+            buildInputs = [ pkgs.darwin.apple_sdk.frameworks.AppKit ];
 
-              cargoSha256 = "KaFScXhvo6/DHB9kjyOhK1dOd7btjuTSm3dNTgmH8dM=";
+            src = builtins.fetchGit {
+              url = "https://github.com/holochain/holochain";
+              ref = "refs/tags/${pname}-${version}";
+              rev = "cf8adc073596f4f5fc3dcf31c30bc8ade47a6f93";
             };
 
-        lair =
-          with pkgs;
+            cargoSha256 = "KaFScXhvo6/DHB9kjyOhK1dOd7btjuTSm3dNTgmH8dM=";
+
+            doCheck = false;
+          };
+
+        lair = with pkgs;
           let
             pname = "lair-keystore";
             version = "v0.2.0";
-          in
-          rustPlatform.buildRustPackage rec {
-              inherit pname;
-              inherit version;
+          in rustPlatform.buildRustPackage rec {
+            inherit pname;
+            inherit version;
 
-              nativeBuildInputs = [ perl ];
+            nativeBuildInputs = [
+              (rust-bin.stable.latest.default.override {
+                extensions = [ "rust-src" ];
+                targets = [ "wasm32-unknown-unknown" ];
+              })
+              perl
+            ];
 
-              buildInputs = [
-                darwin.apple_sdk.frameworks.AppKit
-              ];
+            buildInputs = [ darwin.apple_sdk.frameworks.AppKit ];
 
-              src = builtins.fetchGit
-                {
-                  url = https://github.com/holochain/lair.git;
-                  ref = "refs/tags/lair_keystore-${version}";
-                  rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
-                };
-
-              cargoSha256 = "rSF0BQaGx18zvlGHvWlOUD7g9BQfden0ijsQEIMSWcg=";
+            src = builtins.fetchGit {
+              url = "https://github.com/holochain/lair.git";
+              ref = "refs/tags/lair_keystore-${version}";
+              rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
             };
+
+            cargoSha256 = "rSF0BQaGx18zvlGHvWlOUD7g9BQfden0ijsQEIMSWcg=";
+
+            doCheck = false;
+          };
       };
 
-      devShells.aarch64-darwin.default = 
-      pkgs.mkShell {
+      devShells.aarch64-darwin.default = pkgs.mkShell {
         buildInputs = [
           self.packages.aarch64-darwin.holochain
           self.packages.aarch64-darwin.lair
