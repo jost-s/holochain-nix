@@ -78,7 +78,7 @@
                   rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
                 };
 
-              cargoSha256 = "rSF0BQaGx18zvlGHvWlOUD7g9BQfden0ijsQEIMSWcg";
+              cargoSha256 = "rSF0BQaGx18zvlGHvWlOUD7g9BQfden0ijsQEIMSWcg=";
             };
       };
 
