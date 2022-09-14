@@ -21,15 +21,10 @@
             pname = "holochain";
             version = "0.0.161";
           in
-          stdenv.mkDerivation
-            {
+          rustPlatform.buildRustPackage rec {
               inherit pname version;
 
               buildInputs = [
-                (rust-bin.stable.latest.default.override {
-                  extensions = [ "rust-src" ];
-                  targets = [ "wasm32-unknown-unknown" ];
-                })
                 pkgs.darwin.apple_sdk.frameworks.AppKit
               ];
 
@@ -40,19 +35,7 @@
                   rev = "cf8adc073596f4f5fc3dcf31c30bc8ade47a6f93";
                 };
 
-              buildPhase = ''
-                CARGO_HOME=.cargo cargo build --release --bin holochain --bin hc
-              '';
-
-              installPhase = ''
-                mkdir -p $out/bin
-                mv target/release/holochain $out/bin
-                mv target/release/hc $out/bin
-              '';
-
-              installCheckPhase = ''
-                export PATH="$out/bin:$PATH"
-              '';
+              cargoSha256 = "KaFScXhvo6/DHB9kjyOhK1dOd7btjuTSm3dNTgmH8dM=";
             };
 
         lair =
