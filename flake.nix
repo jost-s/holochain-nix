@@ -19,14 +19,14 @@
           with pkgs;
           let
             pname = "holochain";
-            version = "0.0.156";
+            version = "0.0.161";
           in
           stdenv.mkDerivation
             {
               inherit pname version;
 
               buildInputs = [
-                (rust-bin.stable."1.60.0".default.override {
+                (rust-bin.stable.latest.default.override {
                   extensions = [ "rust-src" ];
                   targets = [ "wasm32-unknown-unknown" ];
                 })
@@ -37,7 +37,7 @@
                 {
                   url = https://github.com/holochain/holochain;
                   ref = "refs/tags/${pname}-${version}";
-                  rev = "46bff70ccb4a6f8fd06720d91774f0fdfc017d0b";
+                  rev = "cf8adc073596f4f5fc3dcf31c30bc8ade47a6f93";
                 };
 
               buildPhase = ''
@@ -67,7 +67,7 @@
               inherit version;
 
               buildInputs = [
-                (rust-bin.stable."1.60.0".default.override {
+                (rust-bin.stable.latest.default.override {
                   extensions = [ "rust-src" ];
                   targets = [ "wasm32-unknown-unknown" ];
                 })
@@ -101,6 +101,7 @@
       pkgs.mkShell {
         buildInputs = [
           self.packages.aarch64-darwin.holochain
+          self.packages.aarch64-darwin.lair
         ];
       };
     };
