@@ -63,7 +63,7 @@
               rev = "840999730ff2a5bacea8a31ed8fbacc954291b5c";
             };
 
-            cargoSha256 = "rSF0BQaGx18zvlGH3WlOUD7g9BQfden0ijsQEIMSWcg=";
+            cargoSha256 = "zCrBBaqgVE5EWfKkkKEqy8lHx9ZTxpOvSb0b19Bh0z8=";
 
             doCheck = false;
           };
