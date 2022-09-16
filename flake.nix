@@ -10,7 +10,7 @@
       overlays = [ (import rust-overlay) ];
       pkgs = import nixpkgs { inherit overlays system; };
     in {
-      packages.aarch64-darwin = {
+      packages.${system} = {
 
         holochain = with pkgs;
           let
@@ -42,7 +42,7 @@
         lair = with pkgs;
           let
             pname = "lair-keystore";
-            version = "v0.2.0";
+            version = "v0.2.1";
           in rustPlatform.buildRustPackage rec {
             inherit pname;
             inherit version;
@@ -60,19 +60,19 @@
             src = builtins.fetchGit {
               url = "https://github.com/holochain/lair.git";
               ref = "refs/tags/lair_keystore-${version}";
-              rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
+              rev = "840999730ff2a5bacea8a31ed8fbacc954291b5c";
             };
 
-            cargoSha256 = "rSF0BQaGx18zvlGHvWlOUD7g9BQfden0ijsQEIMSWcg=";
+            cargoSha256 = "rSF0BQaGx18zvlGH3WlOUD7g9BQfden0ijsQEIMSWcg=";
 
             doCheck = false;
           };
       };
 
-      devShells.aarch64-darwin.default = pkgs.mkShell {
-        buildInputs = [
-          self.packages.aarch64-darwin.holochain
-          self.packages.aarch64-darwin.lair
+      devShells.${system}.default = pkgs.mkShell {
+        packages = [
+          self.packages.${system}.holochain
+          self.packages.${system}.lair
         ];
       };
     };
