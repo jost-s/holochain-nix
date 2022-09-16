@@ -68,12 +68,5 @@
             doCheck = false;
           };
       };
-
-      devShells.${system}.default = pkgs.mkShell {
-        packages = [
-          self.packages.${system}.holochain
-          self.packages.${system}.lair
-        ];
-      };
     };
 }
