@@ -5,7 +5,7 @@
   };
 
   nixConfig = {
-    extra-substituters = [ "https://cache.nixos.org/" ];
+    extra-substituters = [ "https://jost-s.cachix.org/" ];
     extra-trusted-public-keys =
       [ "jost-s.cachix.org-1:MJaFoUZA8dZ+v4zO8dLQd9D154zUWBwOUtEw0W26GL8=" ];
   };
