@@ -4,6 +4,12 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
+  nixConfig = {
+    extra-substituters = [ "https://cache.nixos.org/" ];
+    extra-trusted-public-keys =
+      [ "jost-s.cachix.org-1:MJaFoUZA8dZ+v4zO8dLQd9D154zUWBwOUtEw0W26GL8=" ];
+  };
+
   outputs = { self, nixpkgs, rust-overlay }:
     let
       system = "aarch64-darwin";
@@ -70,10 +76,8 @@
       };
 
       devShells.${system}.default = pkgs.mkShell {
-        packages = [
-          self.packages.${system}.holochain
-          self.packages.${system}.lair
-        ];
+        packages =
+          [ self.packages.${system}.holochain self.packages.${system}.lair ];
       };
     };
 }
