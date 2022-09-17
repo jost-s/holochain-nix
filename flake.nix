@@ -21,7 +21,7 @@
         holochain = with pkgs;
           let
             pname = "holochain";
-            version = "0.0.162";
+            version = "0.0.159";
           in rustPlatform.buildRustPackage rec {
             inherit pname version;
 
@@ -37,10 +37,10 @@
             src = builtins.fetchGit {
               url = "https://github.com/holochain/holochain";
               ref = "refs/tags/${pname}-${version}";
-              rev = "f0264303503df5b872de03d4f991822b34689a9b";
+              rev = "46d6a5bef9e08518b198cbbacca592ec0d99fc6e";
             };
 
-            cargoSha256 = "QL8DB8bKfZP271f2r9DQKBDURkih6R3AO0WVBq/3Yx0=";
+            cargoSha256 = "QI10TBKx03O4Ue2lv0NMhu9n7wZIYbWQ8VJosRfmNxI=";
 
             doCheck = false;
           };
