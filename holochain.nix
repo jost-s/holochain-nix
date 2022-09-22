@@ -1,26 +1,26 @@
-with import <nixpkgs> { };
-
 let
   pname = "holochain";
-  version = "0.0.145";
+  version = "0.0.162";
+  rust-overlay = import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz");
+  nixpkgs = import <nixpkgs> { overlays = [ rust-overlay ]; };
 in
-stdenv.mkDerivation
+nixpkgs.stdenv.mkDerivation
 {
   inherit pname version;
 
   buildInputs = [
-    (rust-bin.stable.latest.default.override {
+    (nixpkgs.rust-bin.stable.latest.default.override {
       extensions = [ "rust-src" ];
       targets = [ "wasm32-unknown-unknown" ];
     })
-    pkgs.darwin.apple_sdk.frameworks.AppKit
+    nixpkgs.darwin.apple_sdk.frameworks.AppKit
   ];
 
   src = builtins.fetchGit
     {
       url = https://github.com/holochain/holochain;
-      ref = "refs/tags/${pname}-${version}";
-      rev = "f7ff004c0925cf19a52d90ff7f8df8ec6d8f170a";
+      ref = "refs/tags/holochain-${version}";
+      rev = "f0264303503df5b872de03d4f991822b34689a9b";
     };
 
   buildPhase = ''
@@ -37,27 +37,3 @@ stdenv.mkDerivation
     export PATH="$out/bin:$PATH"
   '';
 }
-
-
-# { lib, fetchFromGitHub, rustPlatform }:
-
-# rustPlatform.buildRustPackage rec {
-#   pname = "ripgrep";
-#   version = "12.1.1";
-
-#   src = fetchFromGitHub {
-#     owner = "BurntSushi";
-#     repo = pname;
-#     rev = version;
-#     sha256 = "1hqps7l5qrjh9f914r5i6kmcz6f1yb951nv4lby0cjnp5l253kps";
-#   };
-
-#   cargoSha256 = "03wf9r2csi6jpa7v5sw5lpxkrk4wfzwmzx7k3991q3bdjzcwnnwp";
-
-#   meta = with lib; {
-#     description = "A fast line-oriented regex search tool, similar to ag and ack";
-#     homepage = "https://github.com/BurntSushi/ripgrep";
-#     license = licenses.unlicense;
-#     maintainers = [ maintainers.tailhook ];
-#   };
-# }

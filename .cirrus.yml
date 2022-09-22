@@ -19,8 +19,14 @@ nix_shell_task:
     nix-env -iA cachix -f https://cachix.org/api/v1/install
     cachix use jost-s
 
-  nix_shell_script: |
+  # build_flake_script: |
+  #   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh > /dev/null 2>&1
+  #   source /nix/var/nix/profiles/default/etc/profile.d/nix.sh > /dev/null 2>&1
+  #   nix build .#holochain | cachix push jost-s
+  #   nix build .#lair | cachix push jost-s
+
+  build_derivations_script: |
     source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh > /dev/null 2>&1
     source /nix/var/nix/profiles/default/etc/profile.d/nix.sh > /dev/null 2>&1
-    nix build .#holochain | cachix push jost-s
-    # nix build .#lair | cachix push jost-s
+    nix-build holochain.nix | cachix push jost-s
+    nix-build lair-keystore.nix | cachix push jost-s
