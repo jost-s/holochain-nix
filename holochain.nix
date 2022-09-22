@@ -2,7 +2,7 @@ let
   pname = "holochain";
   version = "0.0.162";
   rust-overlay = import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz");
-  nixpkgs = import <nixpkgs> { overlays = [ rust-overlay ]; };
+  nixpkgs = import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz") { overlays = [ rust-overlay ]; };
 in
 nixpkgs.stdenv.mkDerivation
 {
