@@ -1,5 +1,9 @@
 let
-  pkgs = import <nixpkgs> { };
+  nixpkgs = import <nixpkgs> { };
   holochain = import ./holochain.nix;
   lair-keystore = import ./lair-keystore.nix;
-in pkgs.mkShell { packages = [ holochain lair-keystore ]; }
+in
+nixpkgs.stdenv.mkDerivation {
+  name = "holochain";
+  buildInputs = [ holochain lair-keystore ];
+}
