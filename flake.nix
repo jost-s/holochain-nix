@@ -21,7 +21,7 @@
         holochain = with pkgs;
           let
             pname = "holochain";
-            version = "0.0.163";
+            version = "0.0.158";
           in rustPlatform.buildRustPackage rec {
             inherit pname version;
 
@@ -36,11 +36,10 @@
 
             src = builtins.fetchGit {
               url = "https://github.com/holochain/holochain";
-              ref = "refs/tags/${pname}-${version}";
               rev = "0cd777c789ee13ca655f9bffbd7fe11b49e47824";
             };
 
-            cargoSha256 = "e+xwvJeAN2Z3peNLcCiVPQHY8/SmPdYAABK2+j7uJs8=";
+            cargoSha256 = "hAvMZccSgqjdGphPQ4CS4G12MduKclZPcG70RxBL6LU=";
 
             doCheck = false;
           };
@@ -48,7 +47,7 @@
         lair = with pkgs;
           let
             pname = "lair-keystore";
-            version = "v0.2.1";
+            version = "v0.2.0";
           in rustPlatform.buildRustPackage rec {
             inherit pname;
             inherit version;
@@ -65,11 +64,10 @@
 
             src = builtins.fetchGit {
               url = "https://github.com/holochain/lair.git";
-              ref = "refs/tags/lair_keystore-${version}";
-              rev = "840999730ff2a5bacea8a31ed8fbacc954291b5c";
+              rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
             };
 
-            cargoSha256 = "zCrBBaqgVE5EWfKkkKEqy8lHx9ZTxpOvSb0b19Bh0z8=";
+            cargoSha256 = "rSF0BQaGx18zvlGHvWlOUD7g9BQfden0ijsQEIMSWcg=";
 
             doCheck = false;
           };
