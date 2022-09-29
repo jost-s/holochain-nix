@@ -15,14 +15,16 @@
       system = "aarch64-darwin";
       overlays = [ (import rust-overlay) ];
       pkgs = import nixpkgs { inherit overlays system; };
-    in {
+    in
+    {
       packages.${system} = {
 
         holochain = with pkgs;
           let
             pname = "holochain";
-            version = "0.0.164";
-          in rustPlatform.buildRustPackage rec {
+            version = "0.0.161";
+          in
+          rustPlatform.buildRustPackage rec {
             inherit pname version;
 
             nativeBuildInputs = [
@@ -36,10 +38,10 @@
 
             src = builtins.fetchGit {
               url = "https://github.com/holochain/holochain";
-              rev = "4ec12fd60cd1cd403d893b741911f0228bcb8084";
+              rev = "cf8adc073596f4f5fc3dcf31c30bc8ade47a6f93";
             };
 
-            cargoSha256 = "iWGOs4YIJUiqcdYpCScBeIhlpKaCKM4q1bUxa7sSc10=";
+            cargoSha256 = "KaFScXhvo6/DHB9kjyOhK1dOd7btjuTSm3dNTgmH8dM=";
 
             doCheck = false;
           };
@@ -47,8 +49,9 @@
         lair = with pkgs;
           let
             pname = "lair-keystore";
-            version = "0.2.1";
-          in rustPlatform.buildRustPackage rec {
+            version = "0.2.0";
+          in
+          rustPlatform.buildRustPackage rec {
             inherit pname;
             inherit version;
 
@@ -64,10 +67,10 @@
 
             src = builtins.fetchGit {
               url = "https://github.com/holochain/lair.git";
-              rev = "840999730ff2a5bacea8a31ed8fbacc954291b5c";
+              rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
             };
 
-            cargoSha256 = "9etqXZrI0MmF2vY4jG3lo3TfIHRc4xPHkN4EfYKfC8M=";
+            cargoSha256 = "ThfxgXU6AmlKR5PXoCQye7wj1bJb6ExzjbK+IZvomvg=";
 
             doCheck = false;
           };
