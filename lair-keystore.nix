@@ -1,6 +1,6 @@
 let
   pname = "lair-keystore";
-  version = "0.0.10";
+  version = "0.2.0";
   rust-overlay = import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz");
   nixpkgs = import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/e14f9fb57315f0d4abde222364f19f88c77d2b79.tar.gz") { overlays = [ rust-overlay ]; };
 in
@@ -20,10 +20,10 @@ nixpkgs.rustPlatform.buildRustPackage rec {
 
   src = builtins.fetchGit {
     url = "https://github.com/holochain/lair.git";
-    rev = "bbb6f43e833f591680ed53b3cde8d9068dbc6780";
+    rev = "20b18781d217f172187f16a0ef86b78eb1fcd3bd";
   };
 
-  cargoSha256 = "aObOXGYjqK9ExrsnA11Kd4lt2ep1OFbojZubYDmXWmM=";
+  cargoSha256 = "ThfxgXU6AmlKR5PXoCQye7wj1bJb6ExzjbK+IZvomvg=";
 
   doCheck = false;
 }
