@@ -1,6 +1,6 @@
 let
   pname = "holochain";
-  version = "0.0.168";
+  version = "0.0.170";
   rust-overlay = import (builtins.fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz");
   nixpkgs = import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/e14f9fb57315f0d4abde222364f19f88c77d2b79.tar.gz") { overlays = [ rust-overlay ]; };
 in
@@ -18,10 +18,10 @@ nixpkgs.rustPlatform.buildRustPackage rec {
 
   src = builtins.fetchGit {
     url = "https://github.com/holochain/holochain";
-    rev = "6277dfd6eedc873889a4fccb8e5f33c72e3f2b47";
+    rev = "e9364427f6ebe1a7f3a8d75d252fd8445c039f2a";
   };
 
-  cargoSha256 = "npMXMnqQARC5a+MnEqYKsCa5yqwj6YFDWKBcsElpw4A=";
+  cargoSha256 = "xgC3oAU9qKaTEEsl4a6m7CuFDFsdTutP3Ov6TkTSVEI=";
 
   doCheck = false;
 }
