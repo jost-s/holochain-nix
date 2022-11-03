@@ -6,4 +6,5 @@ in
 nixpkgs.stdenv.mkDerivation {
   name = "holochain";
   buildInputs = [ holochain lair-keystore ];
+  # outputs = [ holochain lair-keystore ];
 }
