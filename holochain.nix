@@ -22,7 +22,7 @@ nixpkgs.rustPlatform.buildRustPackage rec {
     ref = "2022-07-20-signed-zome-call";
   };
 
-  cargoSha256 = "CGq6hyCB3HFrSJ6EitP2eFgtCTzjpQ7I47BPIULJdbo=";
+  cargoSha256 = "ZnqR/WEgE3FaJsPrTLHt9zzD4jyAaGtncn1JMOJUEME=";
 
   doCheck = false;
 }
